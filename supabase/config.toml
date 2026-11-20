@@ -1,0 +1,22 @@
+# Minimal Supabase CLI config for the DC repository (lives inside the Mantis Hub project).
+project_id = "mantis-dc"
+
+[api]
+schemas = ["public", "graphql_public"]
+
+[db]
+major_version = 17
+
+[auth]
+site_url = "https://clint-mantis.github.io/mantis-dc/"
+additional_redirect_urls = ["http://localhost:5173", "http://localhost:4173"]
+
+[storage]
+file_size_limit = "25MiB"
+
+[functions.dc-import]
+verify_jwt = true
+[functions.dc-export]
+verify_jwt = true
+[functions.dc-invite]
+verify_jwt = true

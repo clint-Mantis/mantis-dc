@@ -1,0 +1,37 @@
+# Optional: deploys database migrations and Edge Functions to the Mantis Hub Supabase project.
+# Runs only when started by hand (Actions tab › "Deploy Supabase" › Run workflow).
+# Needs two repository secrets: SUPABASE_ACCESS_TOKEN (personal access token) and SUPABASE_DB_PASSWORD.
+name: Deploy Supabase
+
+on:
+  workflow_dispatch:
+    inputs:
+      migrations:
+        description: Apply pending migrations (supabase db push)
+        type: boolean
+        default: true
+      functions:
+        description: Deploy Edge Functions (dc-import, dc-export, dc-invite)
+        type: boolean
+        default: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      PROJECT_REF: lneidlowcjfxpunkwotm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - run: supabase link --project-ref "$PROJECT_REF"
+      - if: ${{ inputs.migrations }}
+        run: supabase db push
+      - if: ${{ inputs.functions }}
+        run: |
+          supabase functions deploy dc-import --project-ref "$PROJECT_REF"
+          supabase functions deploy dc-export --project-ref "$PROJECT_REF"
+          supabase functions deploy dc-invite --project-ref "$PROJECT_REF"

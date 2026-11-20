@@ -1,0 +1,2110 @@
+{
+ "PILLARS": [
+  {
+   "code": "financial",
+   "label": "Financial",
+   "table": "dc_fin_sheet",
+   "criteria": null,
+   "mode": "single",
+   "sort": 1
+  },
+  {
+   "code": "ownership",
+   "label": "Ownership",
+   "table": "dc_own_shareholders",
+   "criteria": "category",
+   "mode": "list",
+   "sort": 2
+  },
+  {
+   "code": "management_control",
+   "label": "Management Control",
+   "table": "dc_mc_members",
+   "criteria": null,
+   "mode": "list",
+   "sort": 3
+  },
+  {
+   "code": "skills_development",
+   "label": "Skills Development",
+   "table": "dc_sd_interventions",
+   "criteria": "criteria",
+   "mode": "list",
+   "sort": 4
+  },
+  {
+   "code": "esd",
+   "label": "Enterprise & Supplier Development",
+   "table": "dc_esd_contributions",
+   "criteria": "esd_category",
+   "mode": "list",
+   "sort": 5
+  },
+  {
+   "code": "procurement",
+   "label": "Suppliers (Preferential Procurement)",
+   "table": "dc_proc_suppliers",
+   "criteria": null,
+   "mode": "list",
+   "sort": 6
+  },
+  {
+   "code": "sed",
+   "label": "Socio-Economic Development",
+   "table": "dc_sed_contributions",
+   "criteria": "contribution_type",
+   "mode": "list",
+   "sort": 7
+  },
+  {
+   "code": "yes",
+   "label": "Y.E.S. Initiative",
+   "table": "dc_yes_participants",
+   "criteria": "yes_category",
+   "mode": "list",
+   "sort": 8
+  }
+ ],
+ "FIELDS": {
+  "financial": [
+   {
+    "key": "turnover",
+    "label": "Turnover",
+    "type": "money",
+    "group": "Turnover"
+   },
+   {
+    "key": "turnover_yes",
+    "label": "Turnover for YES purposes",
+    "type": "money",
+    "group": "Turnover"
+   },
+   {
+    "key": "bee_level_prior_year",
+    "label": "BEE Level from Prior Year",
+    "type": "lookup",
+    "lookup": "bee_level",
+    "group": "Turnover"
+   },
+   {
+    "key": "employees_measured_year",
+    "label": "Number of Employees in measured year",
+    "type": "integer",
+    "group": "Employees"
+   },
+   {
+    "key": "employees_end_prev_year",
+    "label": "Number of Employees at end of previous year",
+    "type": "integer",
+    "group": "Employees"
+   },
+   {
+    "key": "sdl_leviable_amount",
+    "label": "Sum on which the 1% SDL payments are based",
+    "type": "money",
+    "group": "Skills levy"
+   },
+   {
+    "key": "cost_of_sales",
+    "label": "Cost of Sales",
+    "type": "money",
+    "group": "Procurement spend"
+   },
+   {
+    "key": "stock_adjustment",
+    "label": "Stock adjustment figure (+/-)",
+    "type": "money_signed",
+    "group": "Procurement spend"
+   },
+   {
+    "key": "total_capital_spend",
+    "label": "Total Capital Spend",
+    "type": "money",
+    "group": "Procurement spend"
+   },
+   {
+    "key": "total_finance_charges",
+    "label": "Total Finance Charges",
+    "type": "money",
+    "group": "Procurement spend"
+   },
+   {
+    "key": "total_expenses",
+    "label": "Total Expenses",
+    "type": "money",
+    "group": "Procurement spend"
+   },
+   {
+    "key": "industry_norm_pct",
+    "label": "Latest Applicable Industry Norm %",
+    "type": "percent",
+    "group": "Profit"
+   },
+   {
+    "key": "as_at_date",
+    "label": "As at Date",
+    "type": "date",
+    "group": "Profit"
+   },
+   {
+    "key": "current_npat",
+    "label": "Current NPAT",
+    "type": "money_signed",
+    "group": "Profit"
+   },
+   {
+    "key": "npat_basis",
+    "label": "NPAT Applied Using",
+    "type": "enum",
+    "enum": [
+     "current",
+     "average_prior_years",
+     "prior_year_pct",
+     "indicative_margin"
+    ],
+    "enumLabels": [
+     "Current NPAT",
+     "Average of prior years",
+     "Prior year %",
+     "Indicative profit margin"
+    ],
+    "group": "Profit"
+   },
+   {
+    "key": "indicative_margin_pct",
+    "label": "Indicative Profit Margin % to be used",
+    "type": "percent",
+    "group": "Profit"
+   }
+  ],
+  "ownership": [
+   {
+    "key": "category",
+    "label": "Category",
+    "type": "enum",
+    "enum": [
+     "individual",
+     "organisation"
+    ],
+    "enumLabels": [
+     "Individual",
+     "Organisation"
+    ],
+    "required": true,
+    "criteria": true
+   },
+   {
+    "key": "name",
+    "label": "Shareholder / Organisation Name",
+    "type": "text",
+    "required": true,
+    "legacy": [
+     "Sharholder Name",
+     "Shareholder Name"
+    ]
+   },
+   {
+    "key": "person_id",
+    "label": "Linked person",
+    "type": "fk",
+    "fk": "people",
+    "grid": false
+   },
+   {
+    "key": "votes",
+    "label": "Number of Votes",
+    "type": "numeric",
+    "group": "Rights"
+   },
+   {
+    "key": "shares",
+    "label": "Number of Shares",
+    "type": "numeric",
+    "group": "Rights"
+   },
+   {
+    "key": "modified_flow_through",
+    "label": "Modified Flow-through",
+    "type": "boolean",
+    "group": "Rights"
+   },
+   {
+    "key": "modified_flow_through_pct",
+    "label": "Modified Flow-through %",
+    "type": "percent",
+    "group": "Rights"
+   },
+   {
+    "key": "black_person",
+    "label": "Black Person",
+    "type": "boolean",
+    "group": "Black ownership"
+   },
+   {
+    "key": "black_pct",
+    "label": "% Organisation Owned by Black People",
+    "type": "percent",
+    "group": "Black ownership"
+   },
+   {
+    "key": "black_woman",
+    "label": "Black Woman",
+    "type": "boolean",
+    "group": "Black women"
+   },
+   {
+    "key": "bw_pct",
+    "label": "% Organisation Owned by Black Women",
+    "type": "percent",
+    "group": "Black women"
+   },
+   {
+    "key": "designated_group",
+    "label": "Black Designated Group",
+    "type": "boolean",
+    "group": "Designated groups",
+    "legacy": [
+     "Black Degignated Group"
+    ]
+   },
+   {
+    "key": "designated_group_pct",
+    "label": "% Owned by Black Designated Group",
+    "type": "percent",
+    "group": "Designated groups",
+    "legacy": [
+     "% Owned by Black Degignated Group"
+    ]
+   },
+   {
+    "key": "qualifying_ownership_scheme",
+    "label": "Black Person with Qualifying Ownership",
+    "type": "boolean",
+    "group": "Schemes"
+   },
+   {
+    "key": "qos_pct",
+    "label": "% Owned by any Qualifying Ownership Scheme",
+    "type": "percent",
+    "group": "Schemes"
+   },
+   {
+    "key": "esop",
+    "label": "Black Person is with an ESOP",
+    "type": "boolean",
+    "group": "Schemes"
+   },
+   {
+    "key": "esop_pct",
+    "label": "% Owned by an ESOP",
+    "type": "percent",
+    "group": "Schemes"
+   },
+   {
+    "key": "new_entrant",
+    "label": "Black Person is New Entrant",
+    "type": "boolean",
+    "group": "New entrants"
+   },
+   {
+    "key": "new_entrant_pct",
+    "label": "% Owned by Black New Entrants",
+    "type": "percent",
+    "group": "New entrants"
+   },
+   {
+    "key": "market_value_claims",
+    "label": "Market Value of Claims Against Black Entity (R)",
+    "type": "money",
+    "group": "Net value"
+   },
+   {
+    "key": "years_since_transaction",
+    "label": "Years Since BEE Transaction",
+    "type": "integer",
+    "min": 1,
+    "max": 10,
+    "group": "Net value"
+   }
+  ],
+  "management_control": [
+   {
+    "key": "person_id",
+    "label": "Employee",
+    "type": "fk",
+    "fk": "people",
+    "required": true
+   },
+   {
+    "key": "position",
+    "label": "Position / Title",
+    "type": "text",
+    "group": "Role"
+   },
+   {
+    "key": "occupational_level",
+    "label": "Role Classification",
+    "type": "lookup",
+    "lookup": "occupational_level",
+    "required": true,
+    "group": "Role"
+   },
+   {
+    "key": "division_id",
+    "label": "Division or Subsidiary",
+    "type": "fk",
+    "fk": "divisions",
+    "group": "Role"
+   },
+   {
+    "key": "job_grade",
+    "label": "Job Grade",
+    "type": "text",
+    "group": "Role"
+   },
+   {
+    "key": "votes",
+    "label": "Number of Votes",
+    "type": "numeric",
+    "group": "Role",
+    "help": "Board members only"
+   }
+  ],
+  "skills_development": [
+   {
+    "key": "criteria",
+    "label": "Skills Criteria",
+    "type": "enum",
+    "enum": [
+     "sd_spend_formal",
+     "sd_informal_bursaries",
+     "sd_learners"
+    ],
+    "enumLabels": [
+     "Skills spend – formal",
+     "Informal training & bursaries",
+     "Learnerships / learners"
+    ],
+    "required": true,
+    "criteria": true
+   },
+   {
+    "key": "personnel_number",
+    "label": "Personnel Number",
+    "type": "text",
+    "group": "Learner"
+   },
+   {
+    "key": "person_id",
+    "label": "Learner",
+    "type": "fk",
+    "fk": "people",
+    "required": true,
+    "group": "Learner"
+   },
+   {
+    "key": "employee",
+    "label": "Employee",
+    "type": "boolean",
+    "group": "Learner"
+   },
+   {
+    "key": "course_name",
+    "label": "Course Name",
+    "type": "text",
+    "group": "Training"
+   },
+   {
+    "key": "learning_category",
+    "label": "Category",
+    "type": "lookup",
+    "lookup": "learning_category",
+    "group": "Training"
+   },
+   {
+    "key": "start_date",
+    "label": "Date / Start Date",
+    "type": "date",
+    "group": "Training"
+   },
+   {
+    "key": "end_date",
+    "label": "End Date",
+    "type": "date",
+    "group": "Training"
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "type": "text",
+    "group": "Training"
+   },
+   {
+    "key": "course_cost",
+    "label": "Course Costs / Fees",
+    "type": "money",
+    "group": "Cost"
+   },
+   {
+    "key": "ancillary_cost",
+    "label": "Ancillary costs (travel etc.)",
+    "type": "money",
+    "group": "Cost"
+   },
+   {
+    "key": "monthly_stipend",
+    "label": "Monthly Salary or Stipend",
+    "type": "money",
+    "group": "Cost",
+    "sensitive": true
+   },
+   {
+    "key": "months_in_period",
+    "label": "Month in Measured Period",
+    "type": "integer",
+    "min": 1,
+    "max": 12,
+    "group": "Cost"
+   },
+   {
+    "key": "previously_unemployed",
+    "label": "Previously Unemployed",
+    "type": "boolean",
+    "group": "Status"
+   },
+   {
+    "key": "absorbed",
+    "label": "Absorbed",
+    "type": "boolean",
+    "group": "Status"
+   },
+   {
+    "key": "management_level",
+    "label": "Management Level / Role",
+    "type": "lookup",
+    "lookup": "management_level",
+    "group": "Status"
+   },
+   {
+    "key": "office_based",
+    "label": "Office Based",
+    "type": "boolean",
+    "group": "Status"
+   },
+   {
+    "key": "core_critical_skills",
+    "label": "Core & Critical Skills",
+    "type": "boolean",
+    "group": "Status"
+   },
+   {
+    "key": "military_veteran",
+    "label": "Military Veteran",
+    "type": "boolean",
+    "group": "Status"
+   },
+   {
+    "key": "black_designated_group",
+    "label": "Black Designated Group",
+    "type": "boolean",
+    "group": "Status"
+   },
+   {
+    "key": "unemployed_or_student",
+    "label": "Unemployed or Student",
+    "type": "boolean",
+    "group": "Status"
+   },
+   {
+    "key": "employment_status",
+    "label": "Employed or Unemployed",
+    "type": "enum",
+    "enum": [
+     "employed",
+     "unemployed"
+    ],
+    "enumLabels": [
+     "Employed",
+     "Unemployed"
+    ],
+    "group": "Status"
+   }
+  ],
+  "esd": [
+   {
+    "key": "esd_category",
+    "label": "ESD Category",
+    "type": "enum",
+    "enum": [
+     "ed_sd_data",
+     "sd_early_payment"
+    ],
+    "enumLabels": [
+     "ED & SD contributions",
+     "SD early payment"
+    ],
+    "required": true,
+    "criteria": true
+   },
+   {
+    "key": "contribution_type",
+    "label": "Contribution Type",
+    "type": "lookup",
+    "lookup": "esd_contribution_type",
+    "group": "Contribution"
+   },
+   {
+    "key": "year_offset",
+    "label": "Year",
+    "type": "integer",
+    "min": 0,
+    "max": 4,
+    "group": "Contribution",
+    "help": "0 = current year, 1–4 = prior years"
+   },
+   {
+    "key": "beneficiary_id",
+    "label": "Beneficiary",
+    "type": "fk",
+    "fk": "beneficiaries",
+    "group": "Contribution"
+   },
+   {
+    "key": "contribution_amount",
+    "label": "Contribution Amount",
+    "type": "money",
+    "group": "Contribution"
+   },
+   {
+    "key": "outstanding_loan_amount",
+    "label": "Outstanding Loan Amount",
+    "type": "money",
+    "group": "Contribution detail"
+   },
+   {
+    "key": "days_outstanding",
+    "label": "Days Outstanding",
+    "type": "integer",
+    "group": "Contribution detail"
+   },
+   {
+    "key": "guarantee_amount",
+    "label": "Guarantee Amount",
+    "type": "money",
+    "group": "Contribution detail"
+   },
+   {
+    "key": "investment_amount",
+    "label": "Investment Amount",
+    "type": "money",
+    "group": "Contribution detail"
+   },
+   {
+    "key": "commercial_hourly_rate",
+    "label": "Commercial Hourly Rate",
+    "type": "money",
+    "group": "Contribution detail"
+   },
+   {
+    "key": "hourly_discount",
+    "label": "Hourly Discount",
+    "type": "money",
+    "group": "Contribution detail"
+   },
+   {
+    "key": "monthly_salary",
+    "label": "Monthly Salary",
+    "type": "money",
+    "group": "Contribution detail",
+    "sensitive": true
+   },
+   {
+    "key": "interest_rate",
+    "label": "Interest Rate Used",
+    "type": "percent",
+    "group": "Contribution detail"
+   },
+   {
+    "key": "dividend_differential",
+    "label": "Contributor's Dividend / Dividend Differential",
+    "type": "percent",
+    "group": "Contribution detail"
+   },
+   {
+    "key": "hours_delivered",
+    "label": "Hours Delivered",
+    "type": "numeric",
+    "group": "Contribution detail"
+   },
+   {
+    "key": "category_a_beneficiary",
+    "label": "Category A Beneficiary",
+    "type": "boolean",
+    "group": "Beneficiary"
+   },
+   {
+    "key": "beneficiary_type",
+    "label": "Valid ED or SD Beneficiary",
+    "type": "enum",
+    "enum": [
+     "enterprise_development",
+     "supplier_development"
+    ],
+    "enumLabels": [
+     "Enterprise development",
+     "Supplier development"
+    ],
+    "group": "Beneficiary"
+   },
+   {
+    "key": "graduation_ed_to_sd",
+    "label": "Graduation of ED to SD",
+    "type": "boolean",
+    "group": "Beneficiary"
+   },
+   {
+    "key": "jobs_created_flag",
+    "label": "ED or SD Jobs Created",
+    "type": "boolean",
+    "group": "Jobs"
+   },
+   {
+    "key": "base_jobs",
+    "label": "Base Jobs",
+    "type": "integer",
+    "group": "Jobs"
+   },
+   {
+    "key": "created_jobs",
+    "label": "Created Jobs",
+    "type": "integer",
+    "group": "Jobs"
+   },
+   {
+    "key": "employees_prior",
+    "label": "Number of Employees Prior to Intervention",
+    "type": "integer",
+    "group": "Jobs"
+   },
+   {
+    "key": "black_owned_51",
+    "label": "51% Black Owned",
+    "type": "boolean",
+    "group": "Beneficiary"
+   },
+   {
+    "key": "bwo_51",
+    "label": "51% Black Woman Owned",
+    "type": "boolean",
+    "group": "Beneficiary"
+   },
+   {
+    "key": "beneficiary_revenue_last_period",
+    "label": "Beneficiary Revenue in last fin. period",
+    "type": "money",
+    "group": "Beneficiary"
+   },
+   {
+    "key": "sd_programme",
+    "label": "SD Programme",
+    "type": "boolean",
+    "group": "Programme"
+   },
+   {
+    "key": "tier1_qualifying2_supplier",
+    "label": "Tier 1 & Qualifying 2 Supplier",
+    "type": "boolean",
+    "group": "Programme"
+   },
+   {
+    "key": "qualifying_black_intermediary",
+    "label": "Qualifying Black Intermediary",
+    "type": "boolean",
+    "group": "Programme"
+   },
+   {
+    "key": "multiplier_initiative",
+    "label": "ED & SD initiative for contribution multiplier",
+    "type": "lookup",
+    "lookup": "esd_multiplier",
+    "group": "Programme"
+   },
+   {
+    "key": "defence_dev_fund",
+    "label": "Defence Industry Development Fund",
+    "type": "boolean",
+    "group": "Programme"
+   },
+   {
+    "key": "supplier_id",
+    "label": "Supplier",
+    "type": "fk",
+    "fk": "suppliers",
+    "group": "Early payment"
+   },
+   {
+    "key": "ed_category",
+    "label": "Enterprise Development Category",
+    "type": "enum",
+    "enum": [
+     "A",
+     "B"
+    ],
+    "enumLabels": [
+     "A",
+     "B"
+    ],
+    "group": "Programme"
+   },
+   {
+    "key": "sd_agreement",
+    "label": "SD Agreement",
+    "type": "boolean",
+    "group": "Programme",
+    "help": "Upload the agreement as evidence on this row"
+   },
+   {
+    "key": "invoice_number",
+    "label": "Supplier Invoice",
+    "type": "text",
+    "group": "Early payment"
+   },
+   {
+    "key": "invoice_amount",
+    "label": "Invoice Amount",
+    "type": "money",
+    "group": "Early payment"
+   },
+   {
+    "key": "invoice_date",
+    "label": "Invoice Date",
+    "type": "date",
+    "group": "Early payment"
+   },
+   {
+    "key": "payment_date",
+    "label": "Payment Date",
+    "type": "date",
+    "group": "Early payment"
+   },
+   {
+    "key": "partnership_with_government",
+    "label": "Contribution in Partnership with Government",
+    "type": "boolean",
+    "group": "Programme"
+   },
+   {
+    "key": "recipient_30_bwo",
+    "label": "Recipient is 30% Black Woman Owned EME/QSE",
+    "type": "boolean",
+    "group": "Beneficiary"
+   },
+   {
+    "key": "payment_reference",
+    "label": "Payment Ref",
+    "type": "text",
+    "group": "Early payment"
+   }
+  ],
+  "procurement": [
+   {
+    "key": "supplier_id",
+    "label": "Supplier",
+    "type": "fk",
+    "fk": "suppliers",
+    "required": true
+   },
+   {
+    "key": "annual_spend_excl_vat",
+    "label": "Annual Spend (Excl VAT)",
+    "type": "money",
+    "required": true,
+    "group": "Spend"
+   },
+   {
+    "key": "bee_level",
+    "label": "BEE Status",
+    "type": "lookup",
+    "lookup": "bee_level_proc",
+    "required": true,
+    "group": "Status"
+   },
+   {
+    "key": "certificate_issuer_type",
+    "label": "Verification Agent / Chartered Accountant / Sworn Affidavit",
+    "type": "enum",
+    "enum": [
+     "verification_agency",
+     "chartered_accountant",
+     "sworn_affidavit"
+    ],
+    "enumLabels": [
+     "Verification agency",
+     "Chartered accountant",
+     "Sworn affidavit"
+    ],
+    "group": "Certificate"
+   },
+   {
+    "key": "certificate_issuer_name",
+    "label": "Issuer name",
+    "type": "text",
+    "group": "Certificate"
+   },
+   {
+    "key": "certificate_expiry",
+    "label": "BEE Certificate Expiry Date",
+    "type": "date",
+    "group": "Certificate"
+   },
+   {
+    "key": "local_supplier",
+    "label": "Local Supplier",
+    "type": "boolean",
+    "group": "Status"
+   },
+   {
+    "key": "classification",
+    "label": "Classification",
+    "type": "enum",
+    "enum": [
+     "EME",
+     "QSE",
+     "GEN"
+    ],
+    "enumLabels": [
+     "EME",
+     "QSE",
+     "Generic"
+    ],
+    "group": "Status"
+   },
+   {
+    "key": "me_sd_beneficiary_3yr",
+    "label": "ME's Supplier Dev. Beneficiary 3-year contract",
+    "type": "boolean",
+    "group": "Status"
+   },
+   {
+    "key": "black_owned_eme_qse_3yr",
+    "label": "Black Owned EME/QSE (3-year contract)",
+    "type": "boolean",
+    "group": "Status"
+   },
+   {
+    "key": "black_owned_pct",
+    "label": "B/O %",
+    "type": "percent",
+    "group": "Ownership"
+   },
+   {
+    "key": "bwo_pct",
+    "label": "BWO %",
+    "type": "percent",
+    "group": "Ownership"
+   },
+   {
+    "key": "black_owned_51",
+    "label": "51% Black Owned (flow-through)",
+    "type": "boolean",
+    "group": "Ownership"
+   },
+   {
+    "key": "bwo_35",
+    "label": "35% Black Women Owned",
+    "type": "boolean",
+    "group": "Ownership"
+   },
+   {
+    "key": "bwo_51",
+    "label": "51% Black Women Owned",
+    "type": "boolean",
+    "group": "Ownership"
+   },
+   {
+    "key": "designated_group_supplier",
+    "label": "Designated Group Supplier",
+    "type": "boolean",
+    "group": "Ownership"
+   },
+   {
+    "key": "first_time_supplier",
+    "label": "First time supplier",
+    "type": "boolean",
+    "group": "Status"
+   },
+   {
+    "key": "excluded",
+    "label": "Exclusion",
+    "type": "boolean",
+    "group": "Exclusion"
+   },
+   {
+    "key": "exclusion_reason",
+    "label": "Exclusion reason",
+    "type": "lookup",
+    "lookup": "exclusion_reason",
+    "group": "Exclusion"
+   }
+  ],
+  "sed": [
+   {
+    "key": "contribution_type",
+    "label": "Category",
+    "type": "lookup",
+    "lookup": "sed_contribution_type",
+    "required": true,
+    "criteria": true
+   },
+   {
+    "key": "beneficiary_id",
+    "label": "Beneficiary",
+    "type": "fk",
+    "fk": "beneficiaries"
+   },
+   {
+    "key": "description",
+    "label": "Description",
+    "type": "text"
+   },
+   {
+    "key": "contribution_amount",
+    "label": "Contribution Amount",
+    "type": "money",
+    "group": "Value"
+   },
+   {
+    "key": "commercial_hourly_rate",
+    "label": "Commercial Hourly Rate",
+    "type": "money",
+    "group": "Value"
+   },
+   {
+    "key": "hourly_discount",
+    "label": "Hourly Discount (R)",
+    "type": "money",
+    "group": "Value"
+   },
+   {
+    "key": "monthly_salary",
+    "label": "Monthly Salary",
+    "type": "money",
+    "group": "Value",
+    "sensitive": true
+   },
+   {
+    "key": "hours",
+    "label": "Hours",
+    "type": "numeric",
+    "group": "Value"
+   },
+   {
+    "key": "pct_black_beneficiaries",
+    "label": "% To Black Beneficiaries",
+    "type": "percent",
+    "group": "Value"
+   }
+  ],
+  "yes": [
+   {
+    "key": "yes_category",
+    "label": "YES Category",
+    "type": "enum",
+    "enum": [
+     "yes_employment",
+     "yes_absorption"
+    ],
+    "enumLabels": [
+     "YES employment",
+     "YES absorption"
+    ],
+    "required": true,
+    "criteria": true
+   },
+   {
+    "key": "person_id",
+    "label": "Employee aged 18–35",
+    "type": "fk",
+    "fk": "people",
+    "required": true
+   },
+   {
+    "key": "sponsored_employer_id",
+    "label": "Name of EME/DSE Sponsored Employer",
+    "type": "fk",
+    "fk": "beneficiaries",
+    "group": "Placement"
+   },
+   {
+    "key": "start_date",
+    "label": "Start Date",
+    "type": "date",
+    "group": "Placement"
+   },
+   {
+    "key": "contract_type",
+    "label": "Contract of Employment",
+    "type": "enum",
+    "enum": [
+     "fixed",
+     "temporary"
+    ],
+    "enumLabels": [
+     "Fixed term",
+     "Temporary"
+    ],
+    "group": "Placement"
+   },
+   {
+    "key": "months_in_period",
+    "label": "Months in Measured Period",
+    "type": "integer",
+    "min": 1,
+    "max": 12,
+    "group": "Placement"
+   },
+   {
+    "key": "sd_expenditure",
+    "label": "Skills Development Expenditure",
+    "type": "money",
+    "group": "Outcome"
+   },
+   {
+    "key": "absorbed",
+    "label": "Absorption by ME or Industry",
+    "type": "boolean",
+    "group": "Outcome"
+   },
+   {
+    "key": "commitment_to_absorb",
+    "label": "Commitment to Absorb",
+    "type": "boolean",
+    "group": "Outcome"
+   }
+  ]
+ },
+ "RULES": [
+  {
+   "pillar": "financial",
+   "key": "indicative_margin_pct",
+   "criteria_key": "npat_basis",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "financial",
+   "key": "indicative_margin_pct",
+   "criteria_key": "npat_basis",
+   "criteria_value": "indicative_margin",
+   "visible": true,
+   "required": true
+  },
+  {
+   "pillar": "ownership",
+   "key": "black_pct",
+   "criteria_key": "category",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "ownership",
+   "key": "black_pct",
+   "criteria_key": "category",
+   "criteria_value": "organisation",
+   "visible": true
+  },
+  {
+   "pillar": "ownership",
+   "key": "person_id",
+   "criteria_key": "category",
+   "criteria_value": "organisation",
+   "visible": false
+  },
+  {
+   "pillar": "ownership",
+   "key": "modified_flow_through_pct",
+   "criteria_key": "modified_flow_through",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "ownership",
+   "key": "modified_flow_through_pct",
+   "criteria_key": "modified_flow_through",
+   "criteria_value": "true",
+   "visible": true
+  },
+  {
+   "pillar": "skills_development",
+   "key": "office_based",
+   "criteria_key": "criteria",
+   "criteria_value": "sd_informal_bursaries",
+   "visible": false
+  },
+  {
+   "pillar": "skills_development",
+   "key": "ancillary_cost",
+   "criteria_key": "criteria",
+   "criteria_value": "sd_learners",
+   "visible": false
+  },
+  {
+   "pillar": "skills_development",
+   "key": "office_based",
+   "criteria_key": "criteria",
+   "criteria_value": "sd_learners",
+   "visible": false
+  },
+  {
+   "pillar": "skills_development",
+   "key": "core_critical_skills",
+   "criteria_key": "criteria",
+   "criteria_value": "sd_learners",
+   "visible": false
+  },
+  {
+   "pillar": "skills_development",
+   "key": "management_level",
+   "criteria_key": "criteria",
+   "criteria_value": "sd_learners",
+   "visible": false
+  },
+  {
+   "pillar": "skills_development",
+   "key": "unemployed_or_student",
+   "criteria_key": "criteria",
+   "criteria_value": "sd_learners",
+   "visible": false
+  },
+  {
+   "pillar": "skills_development",
+   "key": "core_critical_skills",
+   "criteria_key": "criteria",
+   "criteria_value": null,
+   "sector_code": "CONSTRUCTION",
+   "visible": true,
+   "note": "TODO verify per sector code"
+  },
+  {
+   "pillar": "skills_development",
+   "key": "core_critical_skills",
+   "criteria_key": "criteria",
+   "criteria_value": null,
+   "sector_code": "FINANCE",
+   "visible": true,
+   "note": "TODO verify per sector code"
+  },
+  {
+   "pillar": "skills_development",
+   "key": "core_critical_skills",
+   "criteria_key": "criteria",
+   "criteria_value": null,
+   "sector_code": "ICT",
+   "visible": true,
+   "note": "TODO verify per sector code"
+  },
+  {
+   "pillar": "skills_development",
+   "key": "core_critical_skills",
+   "criteria_key": "criteria",
+   "criteria_value": null,
+   "sector_code": "PROPERTY",
+   "visible": true,
+   "note": "TODO verify per sector code"
+  },
+  {
+   "pillar": "skills_development",
+   "key": "core_critical_skills",
+   "criteria_key": "criteria",
+   "criteria_value": null,
+   "sector_code": "AGRIBEE",
+   "visible": true,
+   "note": "TODO verify per sector code"
+  },
+  {
+   "pillar": "skills_development",
+   "key": "core_critical_skills",
+   "criteria_key": "criteria",
+   "criteria_value": null,
+   "sector_code": "DEFENCE",
+   "visible": true,
+   "note": "TODO verify per sector code"
+  },
+  {
+   "pillar": "skills_development",
+   "key": "core_critical_skills",
+   "criteria_key": "criteria",
+   "criteria_value": null,
+   "sector_code": "MAC",
+   "visible": true,
+   "note": "TODO verify per sector code"
+  },
+  {
+   "pillar": "esd",
+   "key": "supplier_id",
+   "criteria_key": "esd_category",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "supplier_id",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "invoice_number",
+   "criteria_key": "esd_category",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "invoice_number",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "invoice_amount",
+   "criteria_key": "esd_category",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "invoice_amount",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "invoice_date",
+   "criteria_key": "esd_category",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "invoice_date",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "payment_date",
+   "criteria_key": "esd_category",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "payment_date",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "contribution_type",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "year_offset",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "beneficiary_id",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "contribution_amount",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "category_a_beneficiary",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "beneficiary_type",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "graduation_ed_to_sd",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "jobs_created_flag",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "base_jobs",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "created_jobs",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "employees_prior",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "beneficiary_revenue_last_period",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "sd_programme",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "tier1_qualifying2_supplier",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "qualifying_black_intermediary",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "multiplier_initiative",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "ed_category",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "partnership_with_government",
+   "criteria_key": "esd_category",
+   "criteria_value": "sd_early_payment",
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "outstanding_loan_amount",
+   "criteria_key": "contribution_type",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "outstanding_loan_amount",
+   "criteria_key": "contribution_type",
+   "criteria_value": "5",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "outstanding_loan_amount",
+   "criteria_key": "contribution_type",
+   "criteria_value": "6",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "days_outstanding",
+   "criteria_key": "contribution_type",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "days_outstanding",
+   "criteria_key": "contribution_type",
+   "criteria_value": "5",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "days_outstanding",
+   "criteria_key": "contribution_type",
+   "criteria_value": "6",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "guarantee_amount",
+   "criteria_key": "contribution_type",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "guarantee_amount",
+   "criteria_key": "contribution_type",
+   "criteria_value": "7",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "investment_amount",
+   "criteria_key": "contribution_type",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "investment_amount",
+   "criteria_key": "contribution_type",
+   "criteria_value": "9",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "investment_amount",
+   "criteria_key": "contribution_type",
+   "criteria_value": "10",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "commercial_hourly_rate",
+   "criteria_key": "contribution_type",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "commercial_hourly_rate",
+   "criteria_key": "contribution_type",
+   "criteria_value": "11",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "commercial_hourly_rate",
+   "criteria_key": "contribution_type",
+   "criteria_value": "12",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "commercial_hourly_rate",
+   "criteria_key": "contribution_type",
+   "criteria_value": "13",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "hourly_discount",
+   "criteria_key": "contribution_type",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "hourly_discount",
+   "criteria_key": "contribution_type",
+   "criteria_value": "12",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "monthly_salary",
+   "criteria_key": "contribution_type",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "monthly_salary",
+   "criteria_key": "contribution_type",
+   "criteria_value": "4",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "monthly_salary",
+   "criteria_key": "contribution_type",
+   "criteria_value": "13",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "interest_rate",
+   "criteria_key": "contribution_type",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "interest_rate",
+   "criteria_key": "contribution_type",
+   "criteria_value": "5",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "interest_rate",
+   "criteria_key": "contribution_type",
+   "criteria_value": "6",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "interest_rate",
+   "criteria_key": "contribution_type",
+   "criteria_value": "8",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "dividend_differential",
+   "criteria_key": "contribution_type",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "dividend_differential",
+   "criteria_key": "contribution_type",
+   "criteria_value": "10",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "hours_delivered",
+   "criteria_key": "contribution_type",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "hours_delivered",
+   "criteria_key": "contribution_type",
+   "criteria_value": "11",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "hours_delivered",
+   "criteria_key": "contribution_type",
+   "criteria_value": "12",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "hours_delivered",
+   "criteria_key": "contribution_type",
+   "criteria_value": "13",
+   "visible": true
+  },
+  {
+   "pillar": "esd",
+   "key": "defence_dev_fund",
+   "criteria_key": "esd_category",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "esd",
+   "key": "defence_dev_fund",
+   "criteria_key": "esd_category",
+   "criteria_value": null,
+   "sector_code": "DEFENCE",
+   "visible": true
+  },
+  {
+   "pillar": "procurement",
+   "key": "exclusion_reason",
+   "criteria_key": "excluded",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "procurement",
+   "key": "exclusion_reason",
+   "criteria_key": "excluded",
+   "criteria_value": "true",
+   "visible": true,
+   "required": true
+  },
+  {
+   "pillar": "sed",
+   "key": "commercial_hourly_rate",
+   "criteria_key": "contribution_type",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "sed",
+   "key": "commercial_hourly_rate",
+   "criteria_key": "contribution_type",
+   "criteria_value": "6",
+   "visible": true
+  },
+  {
+   "pillar": "sed",
+   "key": "commercial_hourly_rate",
+   "criteria_key": "contribution_type",
+   "criteria_value": "7",
+   "visible": true
+  },
+  {
+   "pillar": "sed",
+   "key": "commercial_hourly_rate",
+   "criteria_key": "contribution_type",
+   "criteria_value": "8",
+   "visible": true
+  },
+  {
+   "pillar": "sed",
+   "key": "hours",
+   "criteria_key": "contribution_type",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "sed",
+   "key": "hours",
+   "criteria_key": "contribution_type",
+   "criteria_value": "6",
+   "visible": true
+  },
+  {
+   "pillar": "sed",
+   "key": "hours",
+   "criteria_key": "contribution_type",
+   "criteria_value": "7",
+   "visible": true
+  },
+  {
+   "pillar": "sed",
+   "key": "hours",
+   "criteria_key": "contribution_type",
+   "criteria_value": "8",
+   "visible": true
+  },
+  {
+   "pillar": "sed",
+   "key": "hourly_discount",
+   "criteria_key": "contribution_type",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "sed",
+   "key": "hourly_discount",
+   "criteria_key": "contribution_type",
+   "criteria_value": "7",
+   "visible": true
+  },
+  {
+   "pillar": "sed",
+   "key": "monthly_salary",
+   "criteria_key": "contribution_type",
+   "criteria_value": null,
+   "visible": false
+  },
+  {
+   "pillar": "sed",
+   "key": "monthly_salary",
+   "criteria_key": "contribution_type",
+   "criteria_value": "8",
+   "visible": true
+  }
+ ],
+ "LOOKUPS": {
+  "race": [
+   [
+    "A",
+    "African"
+   ],
+   [
+    "C",
+    "Coloured"
+   ],
+   [
+    "I",
+    "Indian"
+   ],
+   [
+    "W",
+    "White"
+   ]
+  ],
+  "gender": [
+   [
+    "M",
+    "Male"
+   ],
+   [
+    "F",
+    "Female"
+   ]
+  ],
+  "nationality": [
+   [
+    "SA",
+    "South African"
+   ],
+   [
+    "FN",
+    "Foreign National"
+   ]
+  ],
+  "bee_level": [
+   [
+    "1",
+    "Level 1"
+   ],
+   [
+    "2",
+    "Level 2"
+   ],
+   [
+    "3",
+    "Level 3"
+   ],
+   [
+    "4",
+    "Level 4"
+   ],
+   [
+    "5",
+    "Level 5"
+   ],
+   [
+    "6",
+    "Level 6"
+   ],
+   [
+    "7",
+    "Level 7"
+   ],
+   [
+    "8",
+    "Level 8"
+   ],
+   [
+    "9",
+    "Level 9"
+   ],
+   [
+    "NC",
+    "Non-compliant"
+   ]
+  ],
+  "bee_level_proc": [
+   [
+    "1",
+    "Level 1"
+   ],
+   [
+    "2",
+    "Level 2"
+   ],
+   [
+    "3",
+    "Level 3"
+   ],
+   [
+    "4",
+    "Level 4"
+   ],
+   [
+    "5",
+    "Level 5"
+   ],
+   [
+    "6",
+    "Level 6"
+   ],
+   [
+    "7",
+    "Level 7"
+   ],
+   [
+    "8",
+    "Level 8"
+   ],
+   [
+    "NC",
+    "Non-compliant"
+   ]
+  ],
+  "occupational_level": [
+   [
+    "OL1",
+    "Executive Directors"
+   ],
+   [
+    "OL2",
+    "Other Executive Management"
+   ],
+   [
+    "OL3",
+    "Senior Management"
+   ],
+   [
+    "OL4",
+    "Middle Management"
+   ],
+   [
+    "OL5",
+    "Junior Management"
+   ],
+   [
+    "OL6",
+    "Semi-skilled"
+   ],
+   [
+    "OL7",
+    "Unskilled"
+   ],
+   [
+    "OL8",
+    "Temporary employees"
+   ]
+  ],
+  "learning_category": [
+   [
+    "ABET",
+    "ABET"
+   ],
+   [
+    "A",
+    "Category A"
+   ],
+   [
+    "B",
+    "Category B"
+   ],
+   [
+    "C",
+    "Category C"
+   ],
+   [
+    "D",
+    "Category D"
+   ],
+   [
+    "E",
+    "Category E"
+   ],
+   [
+    "F",
+    "Category F"
+   ]
+  ],
+  "management_level": [
+   [
+    "EXEC",
+    "Executive"
+   ],
+   [
+    "SENIOR",
+    "Senior"
+   ],
+   [
+    "MIDDLE",
+    "Middle"
+   ],
+   [
+    "JUNIOR",
+    "Junior"
+   ],
+   [
+    "NONMGMT",
+    "Non-Management"
+   ]
+  ],
+  "esd_contribution_type": [
+   [
+    "1",
+    "Grant contributions"
+   ],
+   [
+    "2",
+    "Direct costs"
+   ],
+   [
+    "3",
+    "Discounts"
+   ],
+   [
+    "4",
+    "Overhead costs incl. people time"
+   ],
+   [
+    "5",
+    "Interest-free loans"
+   ],
+   [
+    "6",
+    "Standard loans to ED & SD beneficiaries"
+   ],
+   [
+    "7",
+    "Guarantees or relaxed security"
+   ],
+   [
+    "8",
+    "Lower interest rate"
+   ],
+   [
+    "9",
+    "Monthly investments"
+   ],
+   [
+    "10",
+    "Investments with lower dividend to financier"
+   ],
+   [
+    "11",
+    "Professional services at no cost"
+   ],
+   [
+    "12",
+    "Professional services at a discount"
+   ],
+   [
+    "13",
+    "Employee time assisting beneficiary"
+   ]
+  ],
+  "esd_multiplier": [
+   [
+    "NA",
+    "Not applicable"
+   ],
+   [
+    "JOBS",
+    "New jobs"
+   ],
+   [
+    "PRODUCTS",
+    "New SA products"
+   ],
+   [
+    "WAREHOUSING",
+    "Warehousing"
+   ],
+   [
+    "LAND",
+    "Land reform extension"
+   ]
+  ],
+  "sed_contribution_type": [
+   [
+    "1",
+    "Direct grants"
+   ],
+   [
+    "2",
+    "Direct SED costs incl. sector initiatives"
+   ],
+   [
+    "3",
+    "Discounts given"
+   ],
+   [
+    "4",
+    "Overhead costs – monetary"
+   ],
+   [
+    "5",
+    "Overhead costs – non-monetary"
+   ],
+   [
+    "6",
+    "Professional services at no cost"
+   ],
+   [
+    "7",
+    "Professional services at a discount"
+   ],
+   [
+    "8",
+    "Employee time contributed"
+   ]
+  ],
+  "exclusion_reason": [
+   [
+    "IMPORTS",
+    "Imports with no local capacity"
+   ],
+   [
+    "TAXES",
+    "Taxes and levies"
+   ],
+   [
+    "SALARIES",
+    "Salaries and wages"
+   ],
+   [
+    "EMPOWERMENT",
+    "Empowerment-related expenditure"
+   ],
+   [
+    "PUBLIC",
+    "Public entity / organ of state"
+   ],
+   [
+    "OTHER",
+    "Other (explain in note)"
+   ]
+  ]
+ },
+ "LEARNER_CATEGORIES": [
+  "B",
+  "C",
+  "D"
+ ]
+}
