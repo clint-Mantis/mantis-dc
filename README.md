@@ -73,7 +73,7 @@ A full local stack (`supabase start`) needs the Mantis Hub schema first, because
 
 ## One-off setup checklist
 
-- [ ] GitHub › Settings › Pages › Source: **GitHub Actions**.
+- [ ] GitHub › Settings › Pages › Source "Deploy from a branch" › Branch **gh-pages** / (root) › Save (the workflow creates that branch).
 - [ ] Supabase › Authentication › URL Configuration: add `https://clint-mantis.github.io/mantis-dc/` to **Redirect URLs** (needed for magic links, invitations and password resets).
 - [ ] Optional: repository secrets `SUPABASE_ACCESS_TOKEN` and `SUPABASE_DB_PASSWORD` for the manual Supabase deploy workflow.
 - [ ] Give people access: Admin › Users & memberships (Hub super admins already have full access).
