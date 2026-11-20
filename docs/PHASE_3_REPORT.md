@@ -9,7 +9,8 @@
 - POPIA: ID numbers and salaries are never written to the audit log; viewers can't open evidence files.
 
 ## Gate 3 – result
-- Database tests for the full cycle (sample → query → answer → close → verify → lock, evidence accept/reject, storage isolation, audit): **passing**.
+- Database tests for the full cycle (sample → query → answer → close → verify → lock, evidence accept/reject, storage isolation, audit): **passing on the live database**.
+- Supabase security advisor: no errors from the DC objects (only the expected "signed-in users can call SECURITY DEFINER function" warnings; every DC function checks access itself).
 - Playwright full-cycle spec written, **not run yet** (see Phase 2).
 
 ## Deferred / known issues

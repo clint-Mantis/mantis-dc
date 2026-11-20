@@ -12,7 +12,7 @@
 - Demo data: `supabase/seed.sql` (3 shareholders, 10 MC members, 10 suppliers, rows in every other pillar).
 
 ## Gate 2 – result
-- Database tests (capture, required rules, imports, copy forward): **passing**.
+- Database tests (capture, required rules, imports, copy forward): **passing on the live database**.
 - Vitest: **15/15 passing** (rules engine, Zod schemas, import parsing, SA formats).
 - Performance: `dc_list_rows` returns 10 010 supplier rows in ~0.4 s; the dashboard's "rows missing required" for 10 000 rows ~0.8 s.
 - Playwright spec `app/e2e/gates.spec.ts` is written for a local Supabase stack with `seed.sql`; it has **not been run** yet (the build environment has no browser or Docker).

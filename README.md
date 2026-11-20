@@ -53,6 +53,8 @@ Edit `app/src`, push to `main`. The **Build and deploy to GitHub Pages** workflo
 2. Apply it with the Supabase MCP connector in Claude, or with the **Deploy Supabase** workflow (Actions tab › Run workflow; needs the `SUPABASE_ACCESS_TOKEN` and `SUPABASE_DB_PASSWORD` repository secrets).
 3. Run `supabase/tests/dc_gate_tests.sql` in the SQL editor. It ends with an error message that **is** the test report (for example `DC GATE TESTS: 88 passed, 0 failed (all changes rolled back)`), so nothing it creates is kept.
 
+Migration file names match the versions recorded in the live project (`supabase_migrations.schema_migrations`), so `supabase db push` only applies new files. Keep it that way when adding migrations through the MCP connector: rename the file to the version Supabase records.
+
 ### Change pillar fields
 Edit `supabase/spec/fields.mjs`, then run `node supabase/spec/generate.mjs`. This rewrites the generated migrations for a fresh database. For the live database, write a small follow-up migration (add the column + upsert the `dc_field_defs` row). The app, import templates and validation pick changes up automatically from the metadata tables.
 

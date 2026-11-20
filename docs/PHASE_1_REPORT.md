@@ -9,7 +9,7 @@
 - App: login (password, magic link, password reset), organisation switcher (members see their orgs; staff/admins search all Hub orgs), project list with evidence progress, 6-step wizard, project dashboard, admin area (users & memberships, invitations, divisions, sector codes & products, lookups, read-only field metadata and rules, evidence templates), profile page.
 
 ## Gate 1 – result
-`supabase/tests/dc_gate_tests.sql`, Gate 1 section: every role's read/write rights and cross-organisation isolation – **all passing** on Postgres 17 with the Hub stub (88/88 for the whole file). The same file runs against the live database (it always rolls back).
+`supabase/tests/dc_gate_tests.sql`, Gate 1 section: every role's read/write rights and cross-organisation isolation – **all passing**. The whole file (88 tests) passes on a local Postgres 17 and on the **live Mantis Hub database** (20 Nov 2026); it always rolls back, and a follow-up check confirmed no test users, organisations or projects were left behind.
 
 ## Deferred / known issues
 - Field metadata is read-only in the admin area (as allowed by the prompt); edit `fields.mjs` and add a migration.
