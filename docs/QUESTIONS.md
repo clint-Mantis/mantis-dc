@@ -22,3 +22,6 @@ Each item notes the default that was built, so nothing is blocked. Please confir
 13. **Products.** DC has its own small `dc_products` table (seeded "DTi Generic Calculator Package") instead of using Hub's `products` catalogue, to avoid adding rows to the licensing catalogue. Link them later if useful.
 14. **Public repository.** `clint-Mantis/mantis-dc` is public (like `mantis-hub`). It holds no secrets and access is enforced in the database, but the schema and rules are visible. Make it private if that matters (GitHub Pages on a private repo needs a paid plan).
 15. **Legacy data migration** and **scorecard calculation** are out of scope (Phases 4+). The schema leaves room for both: carried-forward/import sources, `import_jobs`, lookups' `meta` for factors.
+
+## Decided
+16. **Hub contacts for DC users** (23 Nov 2026): adding a client editor/viewer to an organisation creates or links their Mantis Hub contact and links it to their login, so the same login opens the Hub client portal. A contact who already exists in Hub under another organisation is linked where it is (Hub allows one contact per email) – move it in Hub if needed.

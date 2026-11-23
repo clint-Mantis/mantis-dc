@@ -1,6 +1,4 @@
--- Minimal stand-in for the Mantis Hub objects the DC migrations depend on.
--- For a bare Postgres test database only (NOT for Supabase local, which already has auth/storage):
--- creates roles, auth.users/uid(), storage.objects, public.organisations and private.is_super_admin/is_staff.
+-- Minimal stand-in for the Mantis Hub objects the DC migrations depend on (plain Postgres testing only).
 do $$ begin create role anon nologin; exception when others then null; end $$; do $$ begin create role authenticated nologin; exception when others then null; end $$; do $$ begin create role service_role nologin bypassrls; exception when others then null; end $$;
 create schema auth; create schema storage; create schema private; create schema extensions;
 create table auth.users (id uuid primary key default gen_random_uuid(), email text, raw_user_meta_data jsonb default '{}', created_at timestamptz default now(), last_sign_in_at timestamptz);
@@ -27,3 +25,5 @@ grant all on public.organisations to authenticated;
 alter table auth.users add column if not exists instance_id uuid, add column if not exists aud text, add column if not exists role text, add column if not exists encrypted_password text, add column if not exists email_confirmed_at timestamptz, add column if not exists raw_app_meta_data jsonb, add column if not exists updated_at timestamptz;
 create table if not exists auth.identities (id uuid primary key, user_id uuid, provider_id text, identity_data jsonb, provider text, created_at timestamptz, updated_at timestamptz, unique (provider_id, provider));
 create extension if not exists pgcrypto schema extensions;
+create table if not exists public.people (id uuid primary key default gen_random_uuid(), organisation_id uuid, first_name text not null, last_name text, email text, auth_user_id uuid unique, client_role text default 'user', status account_status default 'active', source text, contact_type text, deleted_at timestamptz);
+create unique index if not exists people_email_uq on public.people (lower(email)) where email is not null and deleted_at is null;

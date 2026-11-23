@@ -21,7 +21,8 @@ Everything lives in the Mantis Hub Supabase project but **does not change any Hu
 
 - DC tables are `public.dc_*`; helper functions live in the private `dc` schema.
 - Organisations are Hub's `public.organisations` (no duplicate client list).
-- Logins are the shared Supabase Auth users. Hub **super admins** are automatically DC admins; anyone else gets access through `dc_memberships` (per organisation) or `dc_project_members` (per project, e.g. verifiers).
+- Logins are the shared Supabase Auth users. Giving a client user an organisation membership in DC also creates (or links) their **Hub contact** in `public.people` under that organisation, linked to their login – one login for DC and the Hub client portal. Existing contacts are reused (Hub allows one contact per email); Mantis staff are skipped.
+-  Hub **super admins** are automatically DC admins; anyone else gets access through `dc_memberships` (per organisation) or `dc_project_members` (per project, e.g. verifiers).
 - Buckets: `dc-evidence` and `dc-imports` (both private).
 - Edge Functions: `dc-import`, `dc-export`, `dc-invite`.
 
