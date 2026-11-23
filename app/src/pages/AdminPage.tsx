@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useApp, useMeta, roleLabel } from '../lib/context';
 import { supabase, unwrap, callFunction } from '../lib/supabase';
@@ -31,19 +31,28 @@ export function AdminPage() {
 function OrgPicker({ value, onChange }: { value: { id: string; name: string } | null; onChange: (o: { id: string; name: string } | null) => void }) {
   const [q, setQ] = useState('');
   const s = useQuery({ queryKey: ['admin-org', q], enabled: q.length >= 2, queryFn: async () => unwrap(await supabase.rpc('dc_search_orgs', { p_q: q, p_limit: 10 })) as { id: string; name: string }[] });
-  if (value) return <div className="flex items-center gap-2"><b>{value.name}</b><button className="btn btn-sm" onClick={() => onChange(null)}>Change</button></div>;
+  if (value) return <div className="flex items-center gap-2 rounded border border-green-300 bg-green-50 px-3 py-2"><span className="text-sm text-gray-600">Organisation:</span><b>{value.name}</b><button className="btn btn-sm ml-auto" onClick={() => onChange(null)}>Change</button></div>;
   return (
     <div className="relative">
-      <input className="input" placeholder="Search organisation…" value={q} onChange={(e) => setQ(e.target.value)} />
+      <input className="input" placeholder="Type 2+ letters of the organisation name, then click it in the list…" value={q} onChange={(e) => setQ(e.target.value)} />
+      {q.length >= 2 && s.data?.length === 0 && <div className="mt-1 text-xs text-gray-500">No organisations match “{q}”.</div>}
       {s.data && q.length >= 2 && <ul className="absolute z-20 mt-1 max-h-56 w-full overflow-y-auto rounded border bg-white text-sm shadow">{s.data.map((o) => <li key={o.id}><button className="w-full px-3 py-1 text-left hover:bg-gray-100" onClick={() => { onChange(o); setQ(''); }}>{o.name}</button></li>)}</ul>}
     </div>
   );
 }
 
+/** Organisation picked in the header switcher, kept in step with it. */
+function useHeaderOrg() {
+  const { org: headerOrg } = useApp();
+  const [org, setOrg] = useState<{ id: string; name: string } | null>(headerOrg);
+  useEffect(() => { if (headerOrg) setOrg(headerOrg); }, [headerOrg?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+  return [org, setOrg] as const;
+}
+
 function UsersAdmin() {
   const qc = useQueryClient();
   const toast = useToast();
-  const [org, setOrg] = useState<{ id: string; name: string } | null>(null);
+  const [org, setOrg] = useHeaderOrg();
   const [userQ, setUserQ] = useState('');
   const [role, setRole] = useState('client_editor');
   const [invite, setInvite] = useState({ email: '', full_name: '' });
@@ -82,7 +91,7 @@ function UsersAdmin() {
         ))}
         <h3 className="pt-3 font-semibold">Users</h3>
         <input className="input" placeholder="Search users by email or name…" value={userQ} onChange={(e) => setUserQ(e.target.value)} />
-        {!org && <div className="rounded bg-amber-50 px-3 py-2 text-sm text-amber-800">To add a user to an organisation, first choose the organisation in “Organisation memberships” above – then “Add to org” switches on.</div>}
+        {!org && <div className="rounded bg-amber-50 px-3 py-2 text-sm text-amber-800">To add a user to an organisation, first choose the organisation – in the header switcher or in “Organisation memberships” above – then “Add to org” switches on.</div>}
         {org && <div className="rounded bg-blue-50 px-3 py-2 text-sm text-blue-800">“Add to org” adds the user to <b>{org.name}</b> (client roles also get a Mantis Hub contact).</div>}
         <div className="flex items-center gap-2 text-sm">Role for “Add to org”:
           <select className="input w-44" value={role} onChange={(e) => setRole(e.target.value)}>{['consultant', 'client_editor', 'client_viewer'].map((r) => <option key={r} value={r}>{roleLabel[r]}</option>)}</select></div>
@@ -124,7 +133,7 @@ function UsersAdmin() {
 }
 
 function DivisionsAdmin() {
-  const [org, setOrg] = useState<{ id: string; name: string } | null>(null);
+  const [org, setOrg] = useHeaderOrg();
   const [name, setName] = useState('');
   const qc = useQueryClient(); const toast = useToast();
   const q = useQuery({ queryKey: ['divisions', org?.id], enabled: !!org, queryFn: async () => unwrap(await supabase.from('dc_org_divisions').select('*').eq('org_id', org!.id).order('name')) as { id: string; name: string }[] });
