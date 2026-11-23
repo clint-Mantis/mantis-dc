@@ -82,6 +82,8 @@ function UsersAdmin() {
         ))}
         <h3 className="pt-3 font-semibold">Users</h3>
         <input className="input" placeholder="Search users by email or name…" value={userQ} onChange={(e) => setUserQ(e.target.value)} />
+        {!org && <div className="rounded bg-amber-50 px-3 py-2 text-sm text-amber-800">To add a user to an organisation, first choose the organisation in “Organisation memberships” above – then “Add to org” switches on.</div>}
+        {org && <div className="rounded bg-blue-50 px-3 py-2 text-sm text-blue-800">“Add to org” adds the user to <b>{org.name}</b> (client roles also get a Mantis Hub contact).</div>}
         <div className="flex items-center gap-2 text-sm">Role for “Add to org”:
           <select className="input w-44" value={role} onChange={(e) => setRole(e.target.value)}>{['consultant', 'client_editor', 'client_viewer'].map((r) => <option key={r} value={r}>{roleLabel[r]}</option>)}</select></div>
         <ul className="max-h-80 divide-y overflow-y-auto rounded border text-sm">
